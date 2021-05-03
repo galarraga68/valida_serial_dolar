@@ -1,0 +1,12 @@
+Los billetes tienen como mínimo un serial de 10 dígitos (los billetes de 1 y 2 dolares) y 11 dígitos (Los billetes de 5 dolares o mayores)
+
+El serial en el caso de los billetes de 1 y 2 dolares consiste en una letra al principio, 8 dígitos numéricos y una letra al final. En el caso de los billetes de 5 a 100 bolívares el serial consiste en 2 letras al principio, 8 dígitos numéricos y una letra al final. El último dígito del billete también puede ser una estrella
+
+Esto implica también que la máxima cantidad de dígitos a introducir manualmente por billete es de 11 dígitos del serial, 2 por los paréntesis y 3 por el monto, para un total de 16 en el caso del billete de 100 dolares. la mínima cantidad es cuando el billete es de un dolar que introducirían 13 dígitos. 
+
+El formato escogido es el siguiente:
+el serial del billete recibido y entre paréntesis se coloca su monto ejemplo: AW1234578A(50) donde AW1234578A es el serial del billete y el monto del mismo es 50
+
+
+Introduzca el serial y monto de el(los) billete(s) con el siguiente formato serial(monto). Ejemplo: YA46546465J(50)
+Si se trata de más de un billete, utilice la coma ',' para separar la información entre los billetes. Ejemplo: AB35465661A(100),E35465661A(1),C39465661L(1),YA46546465J(50) 

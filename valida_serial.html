@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+function valida_serial() {
+	var suma=0;
+	var desglose="";
+	var billete_1=0;
+	var billete_2=0;
+	var billete_5=0;
+	var billete_10=0;
+	var billete_20=0;
+	var billete_50=0;
+	var billete_100=0;
+	var str = document.getElementById("myDIV").value;
+	
+	var patt1 = /^[A-Z]{1,2}[0-9]{8}[A-N,P-Y|*][(](1[0]{0,2}|2[0]{0,1}|5[0]{0,1})[)]$/;
+	var codigob = str.toUpperCase();
+	var codigo01=codigob.split(',');
+	var longserial = codigo01.length;
+	var codigos_repetidos = [];
+	var temporal = [];
+	var seriales_repetidos = [];
+	var temporal2 = [];
+	
+	//console.log(codigo01);
+	var seriales = [];
+	var montos= new Array(longserial);
+	for ( i = 0; i < longserial; i++ ) {
+		if(codigo01[i].length==0)
+		{
+			alert("Hay un campo vacio en la cadena\nVerifique que no tenga dos comas seguidas\n o una coma al principio o al final de la cadena");
+			break;
+		}
+		else
+		{
+			serial01=codigo01[i].split('(');
+			if(serial01[0].length < 10 || serial01[0].length > 11)
+			{
+				alert(codigo01[i]+" no es un codigo valido");
+				break;
+			}
+			else
+			{
+				var result = codigo01[i].match(patt1);
+				if(result === null)
+				{
+					alert(codigo01[i]+" no es un codigo valido");
+					break;
+				}
+				else
+				{
+					var monto = codigo01[i].substring(codigo01[i].lastIndexOf("(") + 1, codigo01[i].lastIndexOf(")"));
+					suma=eval(suma)+eval(monto);
+					if((monto < 5 && serial01[0].length > 10) || (monto > 4 && serial01[0].length < 11))
+					{
+						alert(codigo01[i]+": el monto del billete no se corresponde con la longitud del serial");
+						break
+					}
+					else
+					{
+						seriales.push(serial01[0]);
+						if(monto==1)
+						{
+							billete_1++;
+						}
+						else if(monto==2)
+						{
+							billete_2++;
+						}
+						else if(monto==5)
+						{
+							billete_5++;
+						}
+						else if(monto==10)
+						{
+							billete_10++;
+						}
+						else if(monto==20)
+						{
+							billete_20++;
+						}
+						else if(monto==50)
+						{
+							billete_50++;
+						}
+						else if(monto==100)
+						{
+							billete_100++;
+						}
+					}
+				}
+			}
+		}	
+	}
+	
+	
+	codigo01.forEach((value,index)=>{
+		temporal = Object.assign([],codigo01); //Copiado de elemento
+		temporal.splice(index,1); //Se elimina el elemnto q se compara
+		  /**
+		   * Se busca en temporal el elemento, y en repetido para 
+		   * ver si esta ingresado al array. indexOf returna
+		   * -1 si el elemento no se encuetra
+	   **/
+	  if(temporal.indexOf(value)!=-1 && codigos_repetidos.indexOf(value)==-1)      codigos_repetidos.push(value);
+	});
+
+	if(codigos_repetidos.length > 0)
+	{
+		alert("El codigo "+codigos_repetidos.join()+" esta repetido");
+		return false;
+	}
+	
+	
+	seriales.forEach((value,index)=>{
+		temporal2 = Object.assign([],seriales); //Copiado de elemento
+		temporal2.splice(index,1); //Se elimina el elemnto q se compara
+		  /**
+		   * Se busca en temporal2 el elemento, y en repetido para 
+		   * ver si esta ingresado al array. indexOf returna
+		   * -1 si el elemento no se encuetra
+	   **/
+	  if(temporal2.indexOf(value)!=-1 && seriales_repetidos.indexOf(value)==-1)      seriales_repetidos.push(value);
+	});
+
+	if(seriales_repetidos.length > 0)
+	{
+		alert("El serial "+seriales_repetidos.join()+" esta repetido en mas de un billete");
+		return false;
+	}
+	
+
+	
+	
+	if(billete_1 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 1 dolar: "+ billete_1;
+	}
+	
+	if(billete_2 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 2 dolares: "+ billete_2;
+	}
+	
+	if(billete_10 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 10 dolares: "+ billete_10;
+	}
+	
+	if(billete_20 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 20 dolares: "+ billete_20;
+	}
+	
+	if(billete_50 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 50 dolares: "+ billete_50;
+	}
+	
+	if(billete_100 > 0)
+	{
+		desglose=desglose+"\nCantidad de billetes de 100 dolares: "+ billete_100;
+	}
+	
+	if(i == longserial)
+		alert("Monto total en dolares: "+suma+"\nDeglose: "+desglose+"\nLa validacion fue exitosa");
+}
+
+</script>
+<style>
+textarea{
+ text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+		<div align=center><font size=3><b>VALIDACION DE SERIAL DE LOS BILLETES DE DOLAR</b></font><br>
+<table border=1>
+	<tr>
+		<td align="center"><textarea id="myDIV" cols="80" rows="10"></textarea></td>
+	</tr>
+	<tr>
+		<td align="center"><button onclick="valida_serial()">Valida Serial</button></td>
+	</tr>
+</table>
+</div>
+<br>
+
+</body>
+</html>
