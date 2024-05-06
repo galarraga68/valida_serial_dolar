@@ -1,6 +1,6 @@
 Los billetes tienen como mínimo un serial de 10 dígitos (los billetes de 1 y 2 dolares) y 11 dígitos (Los billetes de 5 dolares o mayores)
 
-El serial en el caso de los billetes de 1 y 2 dolares consiste en una letra al principio, 8 dígitos numéricos y una letra al final. En el caso de los billetes de 5 a 100 bolívares el serial consiste en 2 letras al principio, 8 dígitos numéricos y una letra al final. El último dígito del billete también puede ser una estrella
+El serial en el caso de los billetes de 1 y 2 dolares consiste en una letra al principio, 8 dígitos numéricos y una letra al final. En el caso de los billetes de 5 a 100 dolares el serial consiste en 2 letras al principio, 8 dígitos numéricos y una letra al final. El último dígito del billete también puede ser una estrella
 
 Esto implica también que la máxima cantidad de dígitos a introducir manualmente por billete es de 11 dígitos del serial, 2 por los paréntesis y 3 por el monto, para un total de 16 en el caso del billete de 100 dolares. la mínima cantidad es cuando el billete es de un dolar que introducirían 13 dígitos. 
 
